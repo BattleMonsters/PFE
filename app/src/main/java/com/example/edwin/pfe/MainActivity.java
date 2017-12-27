@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
@@ -33,6 +34,8 @@ import com.kontakt.sdk.android.common.profile.IBeaconRegion;
 import com.kontakt.sdk.android.common.profile.IEddystoneDevice;
 import com.kontakt.sdk.android.common.profile.IEddystoneNamespace;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -40,7 +43,7 @@ import java.util.UUID;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final int REQUEST_CODE_PERMISSIONS = 100;
-
+    //public  TextView text = (TextView)findViewById(R.id.responseView);
     private final static int REQUEST_CODE_ENABLE_BLUETOOTH = 0;
 
 
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Initialize Proximity SDK
         String apiKey = "NOpUjpWwpCckCePHQnjZngXENPFcmZMj";
 
-
+        final TextView text = (TextView)findViewById(R.id.responseView);;
         KontaktProximitySDK sdk = KontaktProvider.provideProximitySDK(getApplicationContext(), apiKey);
 
         //Add regions
@@ -64,17 +67,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onEntered(IBeaconRegion region, List<IBeaconDevice> iBeacons) {
                 // Entered region with iBeacons
                 Toast.makeText(MainActivity.this, "Entered Region", Toast.LENGTH_SHORT).show();
-                String test1 = iBeacons.get(0).toString();
-                Toast.makeText(MainActivity.this, test1, Toast.LENGTH_SHORT).show();
+                int i;
+                TextView text = (TextView)findViewById(R.id.responseView);
+                for(i=0;i<iBeacons.size();i++) {
+                    String test1 = iBeacons.get(i).toString();
+                    Toast.makeText(MainActivity.this, test1, Toast.LENGTH_SHORT).show();
+                    text.setText(test1);
+                }
+
             }
 
             @Override
             public void onAbandoned(IBeaconRegion region) {
-                // Region abandoned
+                String test2 = region.getProximity() + " on sort de là";
+                Toast.makeText(MainActivity.this, test2, Toast.LENGTH_SHORT).show();
+                text.setText(test2);
             }
         });
 
-       /* sdk.eddystone(eddystoneNamespace, new NamespaceListener() {
+       /*sdk.eddystone(eddystoneNamespace, new NamespaceListener() {
             @Override
             public void onEntered(IEddystoneNamespace namespace, List<IEddystoneDevice> eddystones) {
                 // Entered namespace with eddystones
@@ -90,11 +101,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        KontaktProximitySDK sdk = KontaktProvider.provideProximitySDK(getApplicationContext(), apiKey);
         //Toast.makeText(MainActivity.this, "whattt", Toast.LENGTH_SHORT).show();
 // Define trigger initialization callback
-        /*InitCallback initCallback = new InitCallback() {
+
+        InitCallback initCallback = new InitCallback() {
             @Override
             public void onSuccess() {
                 // Triggers fetched and initialized
                 Toast.makeText(MainActivity.this, "Trigger initCallback onSuccess", Toast.LENGTH_SHORT).show();
+                text.setText("Trigger init");
             }
 
             @Override
@@ -109,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onHandled(Trigger trigger) {
                 // Trigger executed successfully
+                text.setText("Trigger monitor");
                 Toast.makeText(MainActivity.this, "Monitor trigger onHandled", Toast.LENGTH_SHORT).show();
             }
 
@@ -117,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // Trigger execution error
                 Toast.makeText(MainActivity.this, "Monitor trigger Exec failed", Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
     }
 
     protected void test() {
@@ -174,10 +188,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final Button bluetoothButton = (Button) findViewById(R.id.button_bluetooth);
         final Button search = (Button) findViewById(R.id.queryButton);
         final Button secondActivity = (Button) findViewById(R.id.secondActivity);
+        final Button caseOne = (Button) findViewById(R.id.case1);
+        //final Button caseTwo = (Button) findViewById(R.id.case2);
+        //final Button caseThree = (Button) findViewById(R.id.case3);
 
         bluetoothButton.setOnClickListener(this);
         search.setOnClickListener(this);
         secondActivity.setOnClickListener(this);
+        caseOne.setOnClickListener(this);
+        //caseTwo.setOnClickListener(this);
+        //caseThree.setOnClickListener(this);
     }
 
     private void checkPermissions() {
@@ -201,6 +221,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.secondActivity:
                 startActivity(SecondActivity.createIntent(this));
                 break;
+            case R.id.case1:
+                startActivity(CaseOne.createIntent(this));
+                break;
+            /*case R.id.case2:
+                startActivity(CaseTwo.createIntent(this));
+                break;
+            case R.id.case3:
+                startActivity(CaseThree.createIntent(this));
+                break;*/
+
             //Toast.makeText(MainActivity.this, "test", Toast.LENGTH_SHORT).show();
             //test();
 

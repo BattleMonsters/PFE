@@ -32,6 +32,7 @@ tools:context="com.example.edwin.pfe.MainActivity">
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center">
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
@@ -39,20 +40,37 @@ tools:context="com.example.edwin.pfe.MainActivity">
         android:indeterminate="true"
         android:layout_centerHorizontal="true"
         android:visibility="gone" />
+
         <Button
             android:id="@+id/secondActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end" android:text="2"/>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/responseView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </ScrollView>
-</RelativeLayout>
+            android:layout_gravity="end"
+            android:text="Code Vincent"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/secondActivity"
+            android:layout_marginTop="44dp"
+            android:layout_toEndOf="@+id/progressBar"
+            android:layout_toRightOf="@+id/progressBar">
+
+            <TextView
+                android:id="@+id/responseView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+
+        <Button
+            android:id="@+id/case1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/secondActivity"
+            android:text="Case 1" />
+    </RelativeLayout>
 </LinearLayout>
 
 

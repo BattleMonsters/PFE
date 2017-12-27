@@ -25,6 +25,9 @@
         <activity
             android:name=".SecondActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".CaseOne"
+            android:screenOrientation="portrait"/>
         <service
             android:name="com.kontakt.sdk.android.ble.service.ProximityService"
             android:exported="false"/>

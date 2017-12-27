@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PFE</string>
+    <string name="c1_trigger_button">Trigger</string>
+    <string name="c1_enter_button">Enter</string>
+    <string name="c1_leave_button">Leave</string>
+    <string name="api_key">NOpUjpWwpCckCePHQnjZngXENPFcmZMj</string>
 </resources>
